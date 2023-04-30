@@ -84,10 +84,10 @@ def test():
         # Stop condition
         if endpos == middlepos or initpos == middlepos:
             middlevalue = [initpos, endpos][condition == "1"]
-            print(f"Encontrado: {middlevalue} tries {tryes}")
+            print(f"Found: {middlevalue} tries {tryes}")
             return
         if tryes > maxtryes + 1:
-            print("No encontrado")
+            print("Not found")
             return selectecValue, middlevalue, tryes
 
         initpos, endpos = res["initpos"], res["endpos"]
@@ -122,4 +122,4 @@ if __name__ == "__main__":
             print(f"{selectecValue}: {middlevalue} tries {tryes}")
         else:
             buenos += 1
-    print(f"Resultados exitosos {buenos}")
+    print(f"Successfull results {buenos}")
