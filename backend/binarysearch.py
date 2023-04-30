@@ -83,7 +83,8 @@ def test():
 
         # Stop condition
         if endpos == middlepos or initpos == middlepos:
-            middlevalue = [initpos, endpos][condition == "1"]
+            middlepos = [initpos, endpos][condition == "1"]
+            middlevalue = readValueData(middlepos)
             print(f"Found: {middlevalue} tries {tryes}")
             return
         if tryes > maxtryes + 1:
@@ -106,7 +107,9 @@ def auto_test():
         condition = [0, "1"][selectecValue > middlevalue]
         res = get_next_positions(condition == "1", middlepos, initpos, endpos)
         if endpos == middlepos or initpos == middlepos:
-            return selectecValue, [initpos, endpos][condition == "1"], tryes
+            middlepos = [initpos, endpos][condition == "1"]
+            middlevalue = readValueData(middlepos)
+            return selectecValue, middlevalue, tryes
         if tryes > maxtryes + 1:
             return selectecValue, middlevalue, tryes
         initpos, endpos = res["initpos"], res["endpos"]
@@ -114,9 +117,9 @@ def auto_test():
 
 
 if __name__ == "__main__":
-    test()
+    # test()
     buenos = 0
-    for i in range(1000):
+    for i in range(200):
         selectecValue, middlevalue, tryes = auto_test()
         if selectecValue != middlevalue:
             print(f"{selectecValue}: {middlevalue} tries {tryes}")
