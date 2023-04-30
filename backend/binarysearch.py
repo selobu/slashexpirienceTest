@@ -1,7 +1,9 @@
 #!/usr/bin/env
 from readdata import readValueData
+from random import randrange
 
 MAX_POSITION_ALLOWED = 61696 - 1
+MAX_TRIES = 16
 
 
 def _getmiddle(initpos: int, endpos: int) -> int:
@@ -14,7 +16,7 @@ def _getmiddle(initpos: int, endpos: int) -> int:
     Returns:
         middlepos (int) : middle position
     """
-    middlepos = (initpos + endpos) // 2 + 1
+    middlepos = (initpos + endpos) // 2
     return middlepos
 
 
@@ -59,12 +61,8 @@ def get_next_positions(
         dict{initpos:int, endpos:int}: dictionary with next selected positions
     """
     if condition:
-        if selectedpos == endpos + 1:
-            return {"initpos": endpos, "endpos": endpos}
-        return {"initpos": selectedpos, "endpos": endpos}
+        return {"initpos": selectedpos + 1, "endpos": endpos}
     else:
-        if selectedpos == endpos + 1:
-            return {"initpos": initpos, "endpos": initpos}
         return {"initpos": initpos, "endpos": selectedpos}
 
 
@@ -75,16 +73,51 @@ def test():
     middlepos, middlevalue = _getmiddle_pos_and_value(initpos, endpos)
     print("press 1 if true else any value")
     tryes = 0
+    maxtryes = MAX_TRIES
     while True:
         tryes += 1
         condition = input(f"[Try {tryes}] is the value greater than {middlevalue}?")
         res = get_next_positions(condition == "1", middlepos, initpos, endpos)
+
+        # Stop condition
+        if endpos == middlepos or initpos == middlepos:
+            middlevalue = [initpos, endpos][condition == "1"]
+            print(f"Encontrado: {middlevalue} tries {tryes}")
+            return
+        if tryes > maxtryes + 1:
+            print("No encontrado")
+            return selectecValue, middlevalue, tryes
+
         initpos, endpos = res["initpos"], res["endpos"]
         middlepos, middlevalue = _getmiddle_pos_and_value(initpos, endpos)
-        if initpos == middlepos or endpos == middlepos:
-            print(f"Encontrado: {middlepos} tries {tryes}")
-            return
+
+
+def auto_test():
+    selectecValue = randrange(500, MAX_POSITION_ALLOWED - 1000)
+    initpos = 0
+    endpos = MAX_POSITION_ALLOWED
+    middlepos, middlevalue = _getmiddle_pos_and_value(initpos, endpos)
+    tryes = 0
+    maxtryes = 16
+    while True:
+        tryes += 1
+        condition = [0, "1"][selectecValue > middlevalue]
+        res = get_next_positions(condition == "1", middlepos, initpos, endpos)
+        if endpos == middlepos or initpos == middlepos:
+            return selectecValue, [initpos, endpos][condition == "1"], tryes
+        if tryes > maxtryes + 1:
+            return selectecValue, middlevalue, tryes
+        initpos, endpos = res["initpos"], res["endpos"]
+        middlepos, middlevalue = _getmiddle_pos_and_value(initpos, endpos)
 
 
 if __name__ == "__main__":
     test()
+    buenos = 0
+    for i in range(1000):
+        selectecValue, middlevalue, tryes = auto_test()
+        if selectecValue != middlevalue:
+            print(f"{selectecValue}: {middlevalue} tries {tryes}")
+        else:
+            buenos += 1
+    print(f"Resultados exitosos {buenos}")
