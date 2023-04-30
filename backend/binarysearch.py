@@ -14,11 +14,13 @@ def _getmiddle(initpos: int, endpos: int) -> int:
     Returns:
         middlepos (int) : middle position
     """
-    middlepos = (initpos + endpos) // 2
+    middlepos = (initpos + endpos) // 2 + 1
     return middlepos
 
 
-def _getmiddlevalue(initpos: int = 1, endpos: int = MAX_POSITION_ALLOWED) -> int:
+def _getmiddle_pos_and_value(
+    initpos: int = 1, endpos: int = MAX_POSITION_ALLOWED
+) -> int:
     """reads the middlepos and value
 
     Args:
@@ -41,12 +43,48 @@ def _getmiddlevalue(initpos: int = 1, endpos: int = MAX_POSITION_ALLOWED) -> int
     return (middlepos, middlevalue)
 
 
-def get_next(contidition: bool, initpos: int, endpos: int, middlepos: int) -> int:
-    if not contidition:
-        return {initpos: middlepos, endpos: endpos}
+def get_next_positions(
+    condition: bool, selectedpos: int, initpos: int, endpos: int
+) -> int:
+    """Return next positions
+
+    Args:
+        condition (bool): _description_
+        selectedpos (int): selected position to search
+        initpos (int): initial position
+        endpos (int): end position
+
+
+    Returns:
+        dict{initpos:int, endpos:int}: dictionary with next selected positions
+    """
+    if condition:
+        if selectedpos == endpos + 1:
+            return {"initpos": endpos, "endpos": endpos}
+        return {"initpos": selectedpos, "endpos": endpos}
     else:
-        return {initpos: initpos, endpos: middlepos}
+        if selectedpos == endpos + 1:
+            return {"initpos": initpos, "endpos": initpos}
+        return {"initpos": initpos, "endpos": selectedpos}
+
+
+def test():
+    print("Think a value beetween 1 and 61961")
+    initpos = 0
+    endpos = MAX_POSITION_ALLOWED
+    middlepos, middlevalue = _getmiddle_pos_and_value(initpos, endpos)
+    print("press 1 if true else any value")
+    tryes = 0
+    while True:
+        tryes += 1
+        condition = input(f"[Try {tryes}] is the value greater than {middlevalue}?")
+        res = get_next_positions(condition == "1", middlepos, initpos, endpos)
+        initpos, endpos = res["initpos"], res["endpos"]
+        middlepos, middlevalue = _getmiddle_pos_and_value(initpos, endpos)
+        if initpos == middlepos or endpos == middlepos:
+            print(f"Encontrado: {middlepos} tries {tryes}")
+            return
 
 
 if __name__ == "__main__":
-    pass
+    test()
