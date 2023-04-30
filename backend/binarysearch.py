@@ -1,9 +1,15 @@
 #!/usr/bin/env
 from readdata import readValueData
 from random import randrange
+from configuration import saveConfig, config
 
-MAX_POSITION_ALLOWED = 61696 - 1
-MAX_TRIES = 16
+if config is None:
+    MAX_POSITION_ALLOWED = 61695
+    MAX_TRIES = 16
+else:
+    cf = config["general"]
+    MAX_POSITION_ALLOWED = int(cf["MAX_POSITION_ALLOWED"])
+    MAX_TRIES = int(cf["MAX_TRIES"])
 
 
 def _getmiddle(initpos: int, endpos: int) -> int:
