@@ -11,9 +11,9 @@ Project status
 
 Item   | status | missing | Due date MM/DD/YYYY
 ----|-----|------|----
-Binarysearch Logic|  ![55%](https://progress-bar.dev/55) | - | 04/30/2023
-GitHub Actions |  ![40%](https://progress-bar.dev/40) | - | 04/30/2023
-Binarysearch- Tests |  ![20%](https://progress-bar.dev/20) | - | 05/01/2023
+Binarysearch Logic|  ![75%](https://progress-bar.dev/75) | In progress | 05/01/2023
+GitHub Actions |  ![100%](https://progress-bar.dev/100) | complete | 04/30/2023
+Binarysearch- Tests |  ![50%](https://progress-bar.dev/50) | - | 05/01/2023
 Api | ![0%](https://progress-bar.dev/0) | - | 05/04/2023
 Api test | ![0%](https://progress-bar.dev/0) | - | 05/05/2023
 Chatbot | ![0%](https://progress-bar.dev/0) | - | 05/08/2023
