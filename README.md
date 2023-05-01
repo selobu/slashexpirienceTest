@@ -2,10 +2,7 @@
 
 **Chatbot**
 
-![Codestyle](https://img.shields.io/badge/code%20style-black-000000.svg)
-
-![black](https://github.com/selobu/slashexpirienceTest/actions/workflows/black.yml/badge.svg)
-![tests](https://github.com/selobu/slashexpirienceTest/actions/workflows/test.yml/badge.svg)
+![Codestyle](https://img.shields.io/badge/code%20style-black-000000.svg) ![black](https://github.com/selobu/slashexpirienceTest/actions/workflows/black.yml/badge.svg) ![tests](https://github.com/selobu/slashexpirienceTest/actions/workflows/test.yml/badge.svg)
 
 [![Python Version](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue)](https://www.python.org/downloads/release/python-390/)
 
