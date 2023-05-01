@@ -69,6 +69,7 @@ def get_next_positions(
 
 
 def test():
+    """Test a single value"""
     print("Think a value beetween 1 and 61961")
     initpos = 0
     endpos = MAX_POSITION_ALLOWED
@@ -81,7 +82,7 @@ def test():
         condition = input(f"[Try {tryes}] is the value greater than {middlevalue}?")
         res = get_next_positions(condition == "1", middlepos, initpos, endpos)
 
-        # Stop condition
+        # Stop conditions
         if endpos == middlepos or initpos == middlepos:
             middlepos = [initpos, endpos][condition == "1"]
             middlevalue = readValueData(middlepos)
@@ -95,8 +96,8 @@ def test():
         middlepos, middlevalue = _getmiddle_pos_and_value(initpos, endpos)
 
 
-def auto_test():
-    selectecValue = randrange(500, MAX_POSITION_ALLOWED - 1000)
+def auto_test(selectedValue):
+    """Auto test random valu"""
     initpos = 0
     endpos = MAX_POSITION_ALLOWED
     middlepos, middlevalue = _getmiddle_pos_and_value(initpos, endpos)
@@ -118,11 +119,12 @@ def auto_test():
 
 if __name__ == "__main__":
     # test()
-    buenos = 0
+    well_caclulated = 0
     for i in range(200):
-        selectecValue, middlevalue, tryes = auto_test()
+        selectecValue = randrange(MAX_POSITION_ALLOWED)
+        selectecValue, middlevalue, tryes = auto_test(selectecValue)
         if selectecValue != middlevalue:
             print(f"{selectecValue}: {middlevalue} tries {tryes}")
         else:
-            buenos += 1
-    print(f"Successfull results {buenos}")
+            well_caclulated += 1
+    print(f"Successfull results {well_caclulated}")
