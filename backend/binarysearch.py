@@ -10,7 +10,6 @@ from sys import path as syspath
 if str(cdir) not in syspath:
     syspath.append(str(cdir))
 
-print(syspath)
 from readdata import readValueData
 from random import randrange
 from configuration import saveConfig, config
