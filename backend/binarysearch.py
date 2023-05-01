@@ -1,6 +1,16 @@
 #!/usr/bin/env
 __all__ = ["get_next_positions", "getmiddle_pos_and_value"]
 
+# Add current directory to syspath
+from pathlib import Path
+
+cdir = Path(__file__).parent
+from sys import path as syspath
+
+if str(cdir) not in syspath:
+    syspath.append(str(cdir))
+
+print(syspath)
 from readdata import readValueData
 from random import randrange
 from configuration import saveConfig, config
