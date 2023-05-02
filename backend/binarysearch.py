@@ -91,7 +91,7 @@ def get_next_positions(
 
 def interactive_binsearch(
     curr_try: int,
-    conditionEvaluator: bool | function = lambda x: True,
+    conditionEvaluator=lambda x: True,
     initpos: int = 0,
     endpos: int = MAX_POSITION_ALLOWED,
     **kwargs,
