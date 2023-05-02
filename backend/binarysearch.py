@@ -104,7 +104,7 @@ def test():
             return selectecValue, middlevalue, tryes
 
         initpos, endpos = res["initpos"], res["endpos"]
-        middlepos, middlevalue = _getmiddle_pos_and_value(initpos, endpos)
+        middlepos, middlevalue = getmiddle_pos_and_value(initpos, endpos)
 
 
 if __name__ == "__main__":
