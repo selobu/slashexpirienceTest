@@ -1,7 +1,8 @@
 #!/usr/bin/env
-__all__ = ["get_next_positions", "getmiddle_pos_and_value"]
+__all__ = ["interactive_binsearch", "get_next_positions", "getmiddle_pos_and_value"]
 
 # Add current directory to syspath
+from dataclasses import dataclass
 from pathlib import Path
 
 cdir = Path(__file__).parent
@@ -17,6 +18,15 @@ from configuration import saveConfig, config
 cf = config["general"]
 MAX_POSITION_ALLOWED = int(cf["MAX_POSITION_ALLOWED"])
 MAX_TRIES = int(cf["MAX_TRIES"])
+
+
+@dataclass
+class Response:
+    found: bool
+    initpos: int
+    endpos: int
+    middlepos: int
+    curr_try: int
 
 
 def _getmiddle(initpos: int, endpos: int) -> int:
@@ -77,6 +87,36 @@ def get_next_positions(
         return {"initpos": selectedpos + 1, "endpos": endpos}
     else:
         return {"initpos": initpos, "endpos": selectedpos}
+
+
+def interactive_binsearch(
+    curr_try: int,
+    conditionEvaluator: bool | function = lambda x: True,
+    initpos: int = 0,
+    endpos: int = MAX_POSITION_ALLOWED,
+    **kwargs,
+) -> Response:
+    """Interactively move trow every step of the binary search waiting for user response
+    or not asynchronous condition evaluator
+
+    Args:
+        curr_try (int): try number
+        conditionEvaluator (_type_, optional): function to get a value or a boolean. Defaults to lambdax:True.
+        initpos (int, optional): initial position durent current iteration. Defaults to 0.
+        endpos (int, optional): final position durent current iteration. Defaults to MAX_POSITION_ALLOWED.
+
+    Returns:
+        Response object
+    """
+    middlepos = _getmiddle(initpos, endpos)
+    res = get_next_positions(conditionEvaluator(), middlepos, initpos, endpos)
+    if endpos == middlepos or initpos == middlepos:
+        middlepos = [initpos, endpos][conditionEvaluator()]
+        return Response(True, initpos, endpos, middlepos, curr_try + 1)
+    if curr_try > MAX_TRIES:
+        return Response(False, initpos, endpos, middlepos, curr_try + 1)
+    initpos, endpos = res["initpos"], res["endpos"]
+    return Response(False, initpos, endpos, middlepos, curr_try + 1)
 
 
 def test():
