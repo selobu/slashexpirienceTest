@@ -112,8 +112,8 @@ def interactive_binsearch(
     res = get_next_positions(conditionEvaluator(), middlepos, initpos, endpos)
     if middlepos in (endpos, initpos):
         middlepos = [initpos, endpos][conditionEvaluator()]
-        return Response(True, initpos, endpos, middlepos, curr_try + 1)
+        return Response(True, initpos, endpos, middlepos, curr_try )
     if curr_try > MAX_TRIES:
-        return Response(False, initpos, endpos, middlepos, curr_try + 1)
+        return Response(False, initpos, endpos, middlepos, curr_try )
     initpos, endpos = res["initpos"], res["endpos"]
-    return Response(False, initpos, endpos, _getmiddle(initpos, endpos), curr_try + 1)
+    return Response(False, initpos, endpos, _getmiddle(initpos, endpos), curr_try )

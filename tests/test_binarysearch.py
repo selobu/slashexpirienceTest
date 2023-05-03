@@ -52,7 +52,7 @@ def test_interactive_binsearch():
             middlevalue = readValueData(res.middlepos)
             assert selectecValue == middlevalue
             return
-        if res.curr_try > MAX_TRIES + 1:
+        if res.curr_try > MAX_TRIES:
             assert res.curr_try <= MAX_TRIES
             break
         initpos = res.initpos
