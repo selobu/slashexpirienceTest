@@ -1,5 +1,9 @@
 import pytest
-from backend.binarysearch import get_next_positions, getmiddle_pos_and_value
+from backend.binarysearch import (
+    get_next_positions,
+    getmiddle_pos_and_value,
+    interactive_binsearch,
+)
 from backend.readdata import readValueData
 from backend.configuration import config
 from random import randrange
@@ -16,18 +20,44 @@ def test_binary():
     endpos = MAX_POSITION_ALLOWED
     middlepos, middlevalue = getmiddle_pos_and_value(initpos, endpos)
     tryes = 0
-    maxtryes = MAX_TRIES
     while True:
         tryes += 1
-        condition = [0, "1"][selectecValue > middlevalue]
-        res = get_next_positions(condition == "1", middlepos, initpos, endpos)
-        if endpos == middlepos or initpos == middlepos:
-            middlepos = [initpos, endpos][condition == "1"]
+        condition = selectecValue > middlevalue
+        res = get_next_positions(condition, middlepos, initpos, endpos)
+        if middlepos in (initpos, endpos):
+            middlepos = [initpos, endpos][condition]
             middlevalue = readValueData(middlepos)
             assert selectecValue == middlevalue
             break
-        if tryes > maxtryes + 1:
-            assert tryes <= maxtryes
+        if tryes > MAX_TRIES + 1:
+            assert tryes <= MAX_TRIES
             break
         initpos, endpos = res["initpos"], res["endpos"]
         middlepos, middlevalue = getmiddle_pos_and_value(initpos, endpos)
+
+
+def test_interactive_binsearch():
+    selectecValue = randrange(MAX_POSITION_ALLOWED)
+    initpos = 0
+    endpos = MAX_POSITION_ALLOWED
+    _, middlevalue = getmiddle_pos_and_value(initpos, endpos)
+
+    tryes = 0
+    while True:
+        tryes += 1
+        condition = selectecValue > middlevalue
+        res = interactive_binsearch(tryes, lambda: condition, initpos, endpos)
+        if res.found:
+            print(res.curr_try)
+            middlevalue = readValueData(res.middlepos)
+            assert selectecValue == middlevalue
+            return
+        if res.curr_try > MAX_TRIES + 1:
+            assert res.curr_try <= MAX_TRIES
+            break
+        initpos = res.initpos
+        endpos = res.endpos
+        middlevalue = readValueData(res.middlepos)
+
+if __name__ == '__main__':
+    test_interactive_binsearch()
