@@ -58,6 +58,3 @@ def test_interactive_binsearch():
         initpos = res.initpos
         endpos = res.endpos
         middlevalue = readValueData(res.middlepos)
-
-if __name__ == '__main__':
-    test_interactive_binsearch()
