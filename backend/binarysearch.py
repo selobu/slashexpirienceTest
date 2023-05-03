@@ -10,7 +10,6 @@ from sys import path as syspath
 
 if str(cdir) not in syspath:
     syspath.append(str(cdir))
-
 from readdata import readValueData
 from random import randrange
 from configuration import saveConfig, config
@@ -112,8 +111,8 @@ def interactive_binsearch(
     res = get_next_positions(conditionEvaluator(), middlepos, initpos, endpos)
     if middlepos in (endpos, initpos):
         middlepos = [initpos, endpos][conditionEvaluator()]
-        return Response(True, initpos, endpos, middlepos, curr_try )
+        return Response(True, initpos, endpos, middlepos, curr_try)
     if curr_try > MAX_TRIES:
-        return Response(False, initpos, endpos, middlepos, curr_try )
+        return Response(False, initpos, endpos, middlepos, curr_try)
     initpos, endpos = res["initpos"], res["endpos"]
-    return Response(False, initpos, endpos, _getmiddle(initpos, endpos), curr_try )
+    return Response(False, initpos, endpos, _getmiddle(initpos, endpos), curr_try)
