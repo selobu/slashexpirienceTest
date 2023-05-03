@@ -11,14 +11,14 @@ Project status
 
 Item   | status | missing | Due date MM/DD/YYYY
 ----|-----|------|----
-Binarysearch Logic|  ![85%](https://progress-bar.dev/85) | In progress | 05/02/2023
+Binarysearch Logic|  ![95%](https://progress-bar.dev/85) | In progress | 05/03/2023
 GitHub Actions |  ![100%](https://progress-bar.dev/100) | complete | 04/30/2023
-Binarysearch- Tests |  ![50%](https://progress-bar.dev/50) | In progress | 05/02/2023
-Api | ![0%](https://progress-bar.dev/0) | - | 05/04/2023
-Api test | ![0%](https://progress-bar.dev/0) | - | 05/05/2023
-Chatbot | ![0%](https://progress-bar.dev/0) | - | 05/08/2023
-Chatbot tests | ![0%](https://progress-bar.dev/0) | - | 05/08/2023
-Documentation | ![0%](https://progress-bar.dev/0) | - | 08/08/2023
+Binarysearch- Tests |  ![70%](https://progress-bar.dev/50) | In progress | 05/03/2023
+Api | ![0%](https://progress-bar.dev/0) | - | 05/05/2023
+Api test | ![0%](https://progress-bar.dev/0) | - | 05/06/2023
+Chatbot | ![0%](https://progress-bar.dev/0) | - | 05/09/2023
+Chatbot tests | ![0%](https://progress-bar.dev/0) | - | 05/09/2023
+Documentation | ![0%](https://progress-bar.dev/0) | - | 08/10/2023
 
 Video demostration
 <!--
