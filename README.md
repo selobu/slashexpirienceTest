@@ -18,7 +18,7 @@ Api | ![35%](https://progress-bar.dev/35) | In progress | 05/05/2023
 Api test | ![0%](https://progress-bar.dev/0) | - | 05/06/2023
 Chatbot | ![0%](https://progress-bar.dev/0) | - | 05/09/2023
 Chatbot tests | ![0%](https://progress-bar.dev/0) | - | 05/09/2023
-Documentation | ![0%](https://progress-bar.dev/0) | - | 08/10/2023
+Documentation | ![0%](https://progress-bar.dev/0) | - | 05/10/2023
 
 Video demostration
 <!--
