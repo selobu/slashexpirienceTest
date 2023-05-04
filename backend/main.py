@@ -6,38 +6,52 @@ api = Api(
     app,
     version="1.0",
     title="Chatbot",
-    description="A Simple binary Search Api please visit /binsearch",
+    description="A Simple binary Search Api",
 )
+
 ns = api.namespace("binsearch", description="binsearch actions")
 
 
-@app.route("/")
-def hello_world():
-    return "<p>Hello chatbot</p>"
-
-
-todo = api.model(
-    "Todo",
+binsearch = api.model(
+    "binsearch",
     {
-        "id": fields.Integer(readonly=True, description="The task unique identifier"),
-        "task": fields.String(required=True, description="The task details"),
+        "curr_try": fields.Integer(required=True, description="Current try", default=1),
+        "condition":fields.Boolean(required=True, description="Meets the condition?", default=False),
+        "initpos": fields.Integer(required=True, description="initial position", default=0),
+        "endpos": fields.Integer(required=True, description="final position"),
     },
 )
 
+getimage = api.model(
+    "image",
+    {
+        "initpos": fields.Integer(required=True, description="initial position", default=0),
+        "endpos": fields.Integer(required=True, description="final position"),
+    }
+)
 
 @ns.route("/")
-class TodoList(Resource):
-    """Shows a list of all todos, and lets you POST to add new tasks"""
+class BinSearchList(Resource):
+    """Initial iteration entrypoint"""
 
-    @ns.doc("list_todos")
-    @ns.marshal_list_with(todo)
+    @ns.doc("Initial interaction point")
+    @ns.expect(getimage)
+    @ns.marshal_with(binsearch)
     def get(self):
-        """List all tasks"""
+        """Initial interaction point"""
+        return ""
+    
+@ns.route("/interactive")
+class NexIteration(Resource):
+    """Get next iteration stap"""
+
+    @ns.doc("Get data to next iteration")
+    @ns.expect(binsearch)
+    @ns.marshal_with(binsearch)
+    def get(self):
+        """next iteration data"""
         return ""
 
-    @ns.doc("create_todo")
-    @ns.expect(todo)
-    @ns.marshal_with(todo, code=201)
-    def post(self):
-        """Create a new task"""
-        return {}, 201
+
+if __name__ == '__main__':
+    app.run('localhost',8080)
